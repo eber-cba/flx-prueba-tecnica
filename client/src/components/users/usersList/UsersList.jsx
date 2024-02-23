@@ -111,74 +111,64 @@ export default function UsersList() {
           className='table'
           dataSource={filteredUsers}
           rowKey='id'
+          align='right' // Alinea las últimas dos columnas a la derecha
           columns={[
             {
-              title: (
-                <div className='custom-column-header custom-column-username'>
-                  Usuario
-                </div>
-              ),
+              title: <div className='custom-column-username'>Usuario</div>,
               dataIndex: "username",
               key: "username",
               align: "center",
               className: "first-three-columns", // Agregar clase a las primeras tres columnas
             },
             {
-              title: (
-                <div className='custom-column-header custom-column-name'>
-                  Nombre
-                </div>
-              ),
+              title: <div className='custom-column-name'>Nombre</div>,
               dataIndex: "name",
               key: "name",
               align: "center",
               className: "first-three-columns", // Agregar clase a las primeras tres columnas
             },
             {
-              title: (
-                <div className='custom-column-header custom-column-lastname'>
-                  Apellido
-                </div>
-              ),
+              title: <div className='custom-column-lastname'>Apellido</div>,
               dataIndex: "lastname",
               key: "lastname",
               align: "center",
               className: "first-three-columns", // Agregar clase a las primeras tres columnas
             },
             {
-              title: (
-                <div className='custom-column-header custom-column-action '>
-                  Estado
-                </div>
-              ),
+              title: <div className='custom-column-action'>Estado</div>,
               dataIndex: "status",
               key: "status",
-              align: "right",
               className: "custom-column-data column-status", // Aplicar clases para alineación y posicionamiento
               render: (status) => (
-                <Button type='outline'>
+                <Button
+                  type='outline'
+                  style={{
+                    height: "23px",
+                    borderRadius: "3px",
+                    width: "90%",
+                    backgroundColor:
+                      status === "active" ? "#f6ffed" : "#fff1f0",
+                    borderColor: status === "active" ? "#beed99" : "#ffa39e",
+                    color: status === "active" ? "#52c41a" : "#f5222d",
+                    display: "flex", // Usa display flex
+                    alignItems: "center", // Alinea verticalmente el contenido
+                    justifyContent: "center",
+                  }}
+                >
                   {status === "active" ? "Activo" : "Inactivo"}
                 </Button>
               ),
             },
             {
-              title: (
-                <div className='custom-column-header custom-column-action '>
-                  Acción
-                </div>
-              ),
+              title: <div className='custom-column-action'>Acción</div>,
               key: "action",
-              align: "right",
               className: "custom-column-data column-action", // Aplicar clases para alineación y posicionamiento
               render: (text, record) => (
-                <span>
-                  <Button type='primary' onClick={() => handleEditUser(record)}>
+                <span className='action-buttons'>
+                  <Button type='link' onClick={() => handleEditUser(record)}>
                     Editar
                   </Button>{" "}
-                  <Button
-                    type='primary'
-                    onClick={() => handleDeleteUser(record)}
-                  >
+                  <Button type='link' onClick={() => handleDeleteUser(record)}>
                     Eliminar
                   </Button>
                 </span>
