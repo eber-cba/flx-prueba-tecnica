@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Table, Modal } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Button, Table, Modal, Input, Select } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import { getAllUsers, deleteUser } from "../../../redux/users";
 import UserCreate from "../usersCreate/UsersCreate";
+
+const { Option } = Select;
+const { Search } = Input;
 
 export default function UsersList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [filteredUsers, setFilteredUsers] = useState(users); // Estado para almacenar usuarios filtrados
+  const [filter, setFilter] = useState("all"); // Estado para almacenar el filtro de estado
+  const [searchText, setSearchText] = useState(""); // Estado para almacenar el texto de búsqueda
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
+
+  useEffect(() => {
+    filterUsers();
+  }, [users, filter, searchText]);
 
   const handleAddUser = () => {
     setSelectedUser(null);
@@ -28,8 +42,7 @@ export default function UsersList() {
   const handleDeleteUser = async (user) => {
     try {
       await dispatch(deleteUser(user.id));
-      // Después de eliminar el usuario, actualiza la lista de usuarios en el estado local
-      dispatch(getAllUsers()); // Opcional: también podrías omitir este paso si el estado local ya se actualiza automáticamente mediante una suscripción a los cambios en la base de datos
+      dispatch(getAllUsers());
     } catch (error) {
       // Manejar cualquier error aquí
     }
@@ -45,18 +58,59 @@ export default function UsersList() {
     setSelectedUser(null);
   };
 
-  const handleModalAfterClose = () => {
-    dispatch(getAllUsers());
+  const handleFilterChange = (value) => {
+    setFilter(value);
+  };
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const filterUsers = () => {
+    let filteredData = users;
+
+    if (filter !== "all") {
+      filteredData = filteredData.filter((user) => user.status === filter);
+    }
+
+    if (searchText !== "") {
+      filteredData = filteredData.filter(
+        (user) =>
+          user.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          user.lastname.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    setFilteredUsers(filteredData);
   };
 
   return (
     <div>
-      <h2>Lista de Usuarios:</h2>
-      <Button type='primary' onClick={handleAddUser}>
-        Agregar Usuario
-      </Button>
+      <p>
+        Usuarios/<b>Lista de usuarios</b>
+      </p>
+      <div style={{ marginBottom: 16 }}>
+        <Search
+          placeholder='Buscar usuarios'
+          style={{ width: 200, marginRight: 16 }}
+          onChange={handleSearch}
+        />
+        <Select
+          style={{ width: 170, marginRight: 16 }}
+          onChange={handleFilterChange}
+          placeholder='Filtrar por estado'
+        >
+          <Option value='all'>Todos</Option>
+          <Option value='active'>Activos</Option>
+          <Option value='inactive'>Inactivos</Option>
+        </Select>
+
+        <Button type='primary' onClick={handleAddUser}>
+          Agregar Usuario
+        </Button>
+      </div>
       <Table
-        dataSource={users}
+        dataSource={filteredUsers}
         rowKey='id'
         columns={[
           {
@@ -80,7 +134,7 @@ export default function UsersList() {
             key: "status",
             render: (status) => (
               <Button type='outline'>
-                {status === "active" ? "active" : "inactive"}
+                {status === "active" ? "Activo" : "Inactivo"}
               </Button>
             ),
           },
@@ -106,13 +160,11 @@ export default function UsersList() {
           },
         ]}
       />
-
       <Modal
         title={selectedUser ? "Editar Usuario" : "Agregar Usuario"}
         open={isModalVisible}
         onCancel={handleModalCancel}
         onOk={handleModalOk}
-        afterClose={handleModalAfterClose}
         destroyOnClose={true}
         footer={null}
       >

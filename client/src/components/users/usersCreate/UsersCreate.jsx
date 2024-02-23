@@ -1,4 +1,3 @@
-// CreateUserForm.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createUser, editUser } from "../../../redux/users";
@@ -21,12 +20,12 @@ export default function CreateUserForm({ initialValues, onCancel }) {
   useEffect(() => {
     setEditedUser(initialValues || {});
     if (initialValues) {
-      username.setValue(initialValues.username || "");
-      name.setValue(initialValues.name || "");
-      lastname.setValue(initialValues.lastname || "");
-      email.setValue(initialValues.email || "");
-      status.setValue(initialValues.status || "");
-      age.setValue(initialValues.age || "");
+      username.onChange({ target: { value: initialValues.username || "" } });
+      name.onChange({ target: { value: initialValues.name || "" } });
+      lastname.onChange({ target: { value: initialValues.lastname || "" } });
+      email.onChange({ target: { value: initialValues.email || "" } });
+      status.onChange({ target: { value: initialValues.status || "" } });
+      age.onChange({ target: { value: initialValues.age || "" } });
     }
   }, [initialValues]);
 
@@ -53,12 +52,48 @@ export default function CreateUserForm({ initialValues, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type='text' name='username' {...username} placeholder='Username' />
-      <input type='text' name='name' {...name} placeholder='Name' />
-      <input type='text' name='lastname' {...lastname} placeholder='Lastname' />
-      <input type='email' name='email' {...email} placeholder='Email' />
-      <input type='text' name='status' {...status} placeholder='Status' />
-      <input type='number' name='age' {...age} placeholder='Age' />
+      <input
+        type='text'
+        name='username'
+        value={username.value}
+        onChange={username.onChange}
+        placeholder='Username'
+      />
+      <input
+        type='text'
+        name='name'
+        value={name.value}
+        onChange={name.onChange}
+        placeholder='Name'
+      />
+      <input
+        type='text'
+        name='lastname'
+        value={lastname.value}
+        onChange={lastname.onChange}
+        placeholder='Lastname'
+      />
+      <input
+        type='email'
+        name='email'
+        value={email.value}
+        onChange={email.onChange}
+        placeholder='Email'
+      />
+      <input
+        type='text'
+        name='status'
+        value={status.value}
+        onChange={status.onChange}
+        placeholder='Status'
+      />
+      <input
+        type='number'
+        name='age'
+        value={age.value}
+        onChange={age.onChange}
+        placeholder='Age'
+      />
       <button type='submit'>{isEditing ? "Edit User" : "Create User"}</button>
     </form>
   );
