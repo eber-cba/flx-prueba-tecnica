@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Table, Modal, Input, Select } from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { getAllUsers, deleteUser } from "../../../redux/users";
 import UserCreate from "../usersCreate/UsersCreate";
+import "./style.css";
 
 const { Option } = Select;
 const { Search } = Input;
@@ -109,57 +106,88 @@ export default function UsersList() {
           Agregar Usuario
         </Button>
       </div>
-      <Table
-        dataSource={filteredUsers}
-        rowKey='id'
-        columns={[
-          {
-            title: "Usuario",
-            dataIndex: "username",
-            key: "username",
-          },
-          {
-            title: "Nombre",
-            dataIndex: "name",
-            key: "name",
-          },
-          {
-            title: "Apellido",
-            dataIndex: "lastname",
-            key: "lastname",
-          },
-          {
-            title: "Estado",
-            dataIndex: "status",
-            key: "status",
-            render: (status) => (
-              <Button type='outline'>
-                {status === "active" ? "Activo" : "Inactivo"}
-              </Button>
-            ),
-          },
-          {
-            title: "Acción",
-            key: "action",
-            render: (text, record) => (
-              <span>
-                <Button
-                  icon={<EditOutlined />}
-                  onClick={() => handleEditUser(record)}
-                >
-                  Editar
-                </Button>{" "}
-                <Button
-                  icon={<DeleteOutlined />}
-                  onClick={() => handleDeleteUser(record)}
-                >
-                  Eliminar
+      <div className='table-container'>
+        <Table
+          className='table'
+          dataSource={filteredUsers}
+          rowKey='id'
+          columns={[
+            {
+              title: (
+                <div className='custom-column-header custom-column-username'>
+                  Usuario
+                </div>
+              ),
+              dataIndex: "username",
+              key: "username",
+              align: "center",
+              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+            },
+            {
+              title: (
+                <div className='custom-column-header custom-column-name'>
+                  Nombre
+                </div>
+              ),
+              dataIndex: "name",
+              key: "name",
+              align: "center",
+              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+            },
+            {
+              title: (
+                <div className='custom-column-header custom-column-lastname'>
+                  Apellido
+                </div>
+              ),
+              dataIndex: "lastname",
+              key: "lastname",
+              align: "center",
+              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+            },
+            {
+              title: (
+                <div className='custom-column-header custom-column-action '>
+                  Estado
+                </div>
+              ),
+              dataIndex: "status",
+              key: "status",
+              align: "right",
+              className: "custom-column-data column-status", // Aplicar clases para alineación y posicionamiento
+              render: (status) => (
+                <Button type='outline'>
+                  {status === "active" ? "Activo" : "Inactivo"}
                 </Button>
-              </span>
-            ),
-          },
-        ]}
-      />
+              ),
+            },
+            {
+              title: (
+                <div className='custom-column-header custom-column-action '>
+                  Acción
+                </div>
+              ),
+              key: "action",
+              align: "right",
+              className: "custom-column-data column-action", // Aplicar clases para alineación y posicionamiento
+              render: (text, record) => (
+                <span>
+                  <Button type='primary' onClick={() => handleEditUser(record)}>
+                    Editar
+                  </Button>{" "}
+                  <Button
+                    type='primary'
+                    onClick={() => handleDeleteUser(record)}
+                  >
+                    Eliminar
+                  </Button>
+                </span>
+              ),
+            },
+          ]}
+        />
+      </div>
+
       <Modal
         title={selectedUser ? "Editar Usuario" : "Agregar Usuario"}
         open={isModalVisible}

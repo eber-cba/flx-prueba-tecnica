@@ -3,10 +3,10 @@
     {
       "id": 1,
       "username": "user1",
-      "name": "horacio",
+      "name": "cacho",
       "lastname": "larretase",
       "email": "john.doe@example.com",
-      "status": "active",
+      "status": "inactive",
       "age": "302"
     },
     {
