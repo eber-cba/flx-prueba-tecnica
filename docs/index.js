@@ -4,7 +4,7 @@
 */
 
 function reverseString(str) {
-  // Tu solución acá  
+  return str.split("").reverse().join("");
 }
 
 /*
@@ -13,9 +13,12 @@ function reverseString(str) {
   y devuelva true si la cadena es un palíndromo, y false en caso contrario.
 */
 function isPalindrome(str) {
-  // Tu solución acá
-}
+  // Eliminar los espacios en blanco y convertir a minúsculas
+  str = str.toLowerCase().replace(/\s/g, "");
 
+  // Comparar la cadena original con su reverso
+  return str === str.split("").reverse().join("");
+}
 /*
   Ejercicio 3: Find the Nearest Pair
   Dado un array de números enteros, 
@@ -30,9 +33,29 @@ function isPalindrome(str) {
 */
 
 function closestPair(arr) {
-  // Tu solución acá
-}
+  // 1. Ordenar el array
+  arr.sort((a, b) => a - b);
 
+  // 2. Variables para almacenar la diferencia mínima y el par más cercano
+  let minDiff = Infinity;
+  let minDiffElement1, minDiffElement2;
+
+  // 3. Recorrer el array
+  for (let i = 1; i < arr.length; i++) {
+    // Calcular la diferencia absoluta
+    const diff = Math.abs(arr[i] - arr[i - 1]);
+
+    // Actualizar la diferencia mínima y el par más cercano si es necesario
+    if (diff < minDiff) {
+      minDiff = diff;
+      minDiffElement1 = arr[i - 1];
+      minDiffElement2 = arr[i];
+    }
+  }
+
+  // 4. Devolver el par más cercano
+  return [minDiffElement1, minDiffElement2];
+}
 
 /*
   Ejercicio 4: Calculadora - Programación Orientada a Objetos
@@ -67,12 +90,55 @@ function closestPair(arr) {
 */
 
 class Calculator {
-  // Tu solución acá
+  constructor() {
+    this.lastResult = 0;
+  }
+
+  add(a, b) {
+    const result = a + b;
+    this.lastResult = result;
+    return result;
+  }
+
+  subtract(a, b) {
+    const result = a - b;
+    this.lastResult = result;
+    return result;
+  }
+
+  multiply(a, b) {
+    const result = a * b;
+    this.lastResult = result;
+    return result;
+  }
+
+  divide(a, b) {
+    if (b === 0) {
+      throw new Error("Division by zero is not allowed!");
+    }
+    const result = a / b;
+    this.lastResult = result;
+    return result;
+  }
+
+  getLastResult() {
+    return this.lastResult;
+  }
 }
 
+Calculator.prototype.exponentiate = function (base, exponent) {
+  if (exponent < 0) {
+    throw new Error("Exponentiation with negative exponent is not allowed!");
+  }
+  const result = Math.pow(base, exponent);
+  this.lastResult = result;
+  return result;
+};
+
+module.exports = Calculator;
 module.exports = {
   closestPair,
   isPalindrome,
   reverseString,
   Calculator,
-}
+};
