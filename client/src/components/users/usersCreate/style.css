@@ -1,0 +1,30 @@
+.create-user-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-column {
+  width: 45%; /* Ancho de cada columna */
+  margin-top: 30px;
+}
+
+.form-input {
+  width: 100%;
+  margin-bottom: 40px; /* Espaciado inferior entre elementos */
+}
+
+.form-button {
+  align-self: end;
+  width: 60%;
+  margin-top: 10px; /* Espaciado superior para el botón */
+}
+.form-column {
+  display: flex; /* Make the form columns into flex containers */
+  flex-direction: column; /* Stack labels and inputs vertically */
+  margin-bottom: 1rem; /* Add some space between form columns */
+}
+
+.form-label {
+  margin-bottom: 0.7rem; /* Add space between label and input */
+  font-weight: 600;
+}

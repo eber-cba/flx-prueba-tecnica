@@ -175,6 +175,7 @@ export default function UsersList() {
               ),
             },
           ]}
+          pagination={{ showSizeChanger: false }}
         />
       </div>
 

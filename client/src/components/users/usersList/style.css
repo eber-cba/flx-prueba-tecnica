@@ -51,3 +51,29 @@
 .action-buttons button {
   display: inline-block; /* Muestra los botones en línea */
 }
+/* Modal */
+/* Agrega estas reglas CSS en tu archivo de estilos style.css */
+.ant-modal {
+  max-width: 1000px !important; /* Establece el ancho máximo del modal */
+  width: 47% !important; /* Ajusta el ancho del modal según tus necesidades */
+}
+
+@media screen and (max-width: 768px) {
+  .ant-modal {
+    width: 95%; /* Ajusta el ancho del modal para pantallas más pequeñas */
+  }
+}
+
+/* Estilos para centrar el modal */
+.ant-modal-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-modal-content {
+  max-height: 80vh; /* Establece la altura máxima del contenido del modal */
+}
+.ant-modal-title {
+  margin-top: -10px !important; /* Ajusta este valor según sea necesario */
+}
