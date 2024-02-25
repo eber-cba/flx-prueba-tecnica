@@ -97,30 +97,33 @@ export default function UsersList() {
 
   return (
     <div>
-      <p>
-        Usuarios/<b>Lista de usuarios</b>
-      </p>
-      <div style={{ marginBottom: 16 }}>
-        <Search
-          placeholder='Búsqueda por nombre o apellido'
-          style={{ width: 250, marginRight: 16 }}
-          onChange={handleSearch}
-        />
-        <Select
-          style={{ width: 170, marginRight: 16 }}
-          onChange={handleFilterChange}
-          placeholder='Filtrar por estado'
-        >
-          <Option value='all'>Todos</Option>
-          <Option value='active'>Activos</Option>
-          <Option value='inactive'>Inactivos</Option>
-        </Select>
-
-        <Button type='primary' onClick={handleAddUser}>
-          Agregar Usuario
-        </Button>
-      </div>
       <div className='table-container'>
+        <p>
+          Usuarios / <b>Lista de usuarios</b>
+        </p>
+        <div className='container-filtros' style={{ marginBottom: 16 }}>
+          <div>
+            <Search
+              placeholder='Búsqueda por nombre o apellido'
+              style={{ width: 270, marginRight: 16 }}
+              onChange={handleSearch}
+            />
+            <Select
+              style={{ width: 170, marginRight: 16 }}
+              onChange={handleFilterChange}
+              placeholder='Filtrar por estado'
+            >
+              <Option value='all'>Todos</Option>
+              <Option value='active'>Activos</Option>
+              <Option value='inactive'>Inactivos</Option>
+            </Select>
+          </div>
+          <div>
+            <Button type='primary' onClick={handleAddUser}>
+              Agregar Usuario
+            </Button>
+          </div>
+        </div>
         <Table
           className='table'
           dataSource={filteredUsers}

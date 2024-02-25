@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": 26,
-      "username": "user26",
-      "name": "Lucas",
-      "lastname": "Hill",
-      "email": "lucas.hill@example.com",
-      "status": "active",
-      "age": 33
-    },
-    {
       "id": 28,
       "username": "user28",
       "name": "Mateo",
@@ -26,15 +17,6 @@
       "email": "madison.baker@example.com",
       "status": "inactive",
       "age": 30
-    },
-    {
-      "id": 31,
-      "username": "user31",
-      "name": "Carter",
-      "lastname": "Green",
-      "email": "carter.green@example.com",
-      "status": "active",
-      "age": 32
     },
     {
       "id": 32,
