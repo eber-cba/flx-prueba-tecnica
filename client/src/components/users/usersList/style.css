@@ -41,7 +41,10 @@
 .action-buttons {
   white-space: nowrap; /* Evita que los botones se envuelvan */
 }
-
+.custom-column-action {
+  min-width: 100px; /* Ancho mínimo para la columna de acción */
+  white-space: nowrap; /* Evita que el contenido de la columna se envuelva */
+}
 .action-buttons button {
   display: inline-block; /* Muestra los botones en línea */
   margin-right: -10% !important;
