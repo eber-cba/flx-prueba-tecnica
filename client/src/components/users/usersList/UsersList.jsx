@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Table, Modal, Input, Select } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Button, Table, Modal, Input, Select, Spin, message } from "antd";
 import { getAllUsers, deleteUser } from "../../../redux/users";
 import UserCreate from "../usersCreate/UsersCreate";
 import "./style.css";
@@ -14,9 +13,12 @@ export default function UsersList() {
   const users = useSelector((state) => state.users);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [filteredUsers, setFilteredUsers] = useState(users); // Estado para almacenar usuarios filtrados
-  const [filter, setFilter] = useState("all"); // Estado para almacenar el filtro de estado
-  const [searchText, setSearchText] = useState(""); // Estado para almacenar el texto de búsqueda
+  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filter, setFilter] = useState("all");
+  const [searchText, setSearchText] = useState("");
+  const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -24,7 +26,7 @@ export default function UsersList() {
 
   useEffect(() => {
     filterUsers();
-  }, [users, filter, searchText]);
+  }, [users, filter, searchText]); // Actualiza el parámetro aquí
 
   const handleAddUser = () => {
     setSelectedUser(null);
@@ -36,12 +38,24 @@ export default function UsersList() {
     setIsModalVisible(true);
   };
 
-  const handleDeleteUser = async (user) => {
+  const handleDeleteUser = (user) => {
+    setUserToDelete(user);
+    setConfirmDeleteVisible(true);
+  };
+
+  const confirmDelete = async () => {
     try {
-      await dispatch(deleteUser(user.id));
-      dispatch(getAllUsers());
+      setIsDeleting(true);
+      await dispatch(deleteUser(userToDelete.id));
+      setTimeout(() => {
+        message.success("Usuario eliminado correctamente");
+        setIsDeleting(false);
+        setConfirmDeleteVisible(false);
+        dispatch(getAllUsers());
+      }, 1000);
     } catch (error) {
-      // Manejar cualquier error aquí
+      setIsDeleting(false);
+      message.error("Hubo un error al eliminar el usuario");
     }
   };
 
@@ -88,8 +102,8 @@ export default function UsersList() {
       </p>
       <div style={{ marginBottom: 16 }}>
         <Search
-          placeholder='Buscar usuarios'
-          style={{ width: 200, marginRight: 16 }}
+          placeholder='Búsqueda por nombre o apellido'
+          style={{ width: 250, marginRight: 16 }}
           onChange={handleSearch}
         />
         <Select
@@ -111,34 +125,34 @@ export default function UsersList() {
           className='table'
           dataSource={filteredUsers}
           rowKey='id'
-          align='right' // Alinea las últimas dos columnas a la derecha
+          align='right'
           columns={[
             {
               title: <div className='custom-column-username'>Usuario</div>,
               dataIndex: "username",
               key: "username",
               align: "center",
-              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+              className: "first-three-columns",
             },
             {
               title: <div className='custom-column-name'>Nombre</div>,
               dataIndex: "name",
               key: "name",
               align: "center",
-              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+              className: "first-three-columns",
             },
             {
               title: <div className='custom-column-lastname'>Apellido</div>,
               dataIndex: "lastname",
               key: "lastname",
               align: "center",
-              className: "first-three-columns", // Agregar clase a las primeras tres columnas
+              className: "first-three-columns",
             },
             {
               title: <div className='custom-column-action'>Estado</div>,
               dataIndex: "status",
               key: "status",
-              className: "custom-column-data column-status", // Aplicar clases para alineación y posicionamiento
+              className: "custom-column-data column-status",
               render: (status) => (
                 <Button
                   type='outline'
@@ -150,8 +164,8 @@ export default function UsersList() {
                       status === "active" ? "#f6ffed" : "#fff1f0",
                     borderColor: status === "active" ? "#beed99" : "#ffa39e",
                     color: status === "active" ? "#52c41a" : "#f5222d",
-                    display: "flex", // Usa display flex
-                    alignItems: "center", // Alinea verticalmente el contenido
+                    display: "flex",
+                    alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
@@ -162,15 +176,24 @@ export default function UsersList() {
             {
               title: <div className='custom-column-action'>Acción</div>,
               key: "action",
-              className: "custom-column-data column-action", // Aplicar clases para alineación y posicionamiento
+              className: "custom-column-data column-action",
               render: (text, record) => (
                 <span className='action-buttons'>
                   <Button type='link' onClick={() => handleEditUser(record)}>
                     Editar
                   </Button>{" "}
-                  <Button type='link' onClick={() => handleDeleteUser(record)}>
+                  <Button
+                    type='link'
+                    onClick={() => handleDeleteUser(record)}
+                    disabled={isDeleting}
+                  >
                     Eliminar
                   </Button>
+                  {isDeleting &&
+                    userToDelete &&
+                    userToDelete.id === record.id && (
+                      <Spin size='small' style={{ marginLeft: "5px" }} />
+                    )}
                 </span>
               ),
             },
@@ -189,6 +212,39 @@ export default function UsersList() {
       >
         <UserCreate initialValues={selectedUser} onCancel={handleModalCancel} />
       </Modal>
+
+      {confirmDeleteVisible && (
+        <Modal
+          style={{ width: "200px" }}
+          title='Eliminar usuario'
+          open={confirmDeleteVisible}
+          onCancel={() => setConfirmDeleteVisible(false)}
+          footer={[
+            <Button key='cancel' onClick={() => setConfirmDeleteVisible(false)}>
+              Cancelar
+            </Button>,
+            <Button
+              key='delete'
+              type='primary'
+              onClick={confirmDelete}
+              danger
+              loading={isDeleting}
+            >
+              Eliminar
+            </Button>,
+          ]}
+        >
+          {!isDeleting && (
+            <p style={{ padding: "5%" }}>
+              ¿Estás seguro de que deseas eliminar este usuario{" "}
+              <span style={{ color: "red" }}>
+                {userToDelete && userToDelete.username}
+              </span>
+              ?
+            </p>
+          )}
+        </Modal>
+      )}
     </div>
   );
 }

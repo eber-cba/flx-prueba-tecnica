@@ -1,231 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "user1",
-      "name": "cacho",
-      "lastname": "larretase",
-      "email": "john.doe@example.com",
-      "status": "active",
-      "age": "302"
-    },
-    {
-      "id": 2,
-      "username": "user22",
-      "name": "eeee",
-      "lastname": "Smitherssss",
-      "email": "jane.smith@example.com",
-      "status": "inactive",
-      "age": "23"
-    },
-    {
-      "id": 3,
-      "username": "user3",
-      "name": "Michael",
-      "lastname": "ssc",
-      "email": "michael.johnson@example.com",
-      "status": "active",
-      "age": 35
-    },
-    {
-      "id": 4,
-      "username": "user4",
-      "name": "Emilys",
-      "lastname": "Brown",
-      "email": "emily.brown@example.com",
-      "status": "active",
-      "age": 28
-    },
-    {
-      "id": 5,
-      "username": "user5",
-      "name": "Williame",
-      "lastname": "Wilsonea",
-      "email": "william.wilson@example.com",
-      "status": "inactive",
-      "age": 40
-    },
-    {
-      "id": 6,
-      "username": "user6",
-      "name": "Olivia",
-      "lastname": "Jones",
-      "email": "olivia.jones@example.com",
-      "status": "active",
-      "age": 32
-    },
-    {
-      "id": 7,
-      "username": "user7",
-      "name": "James",
-      "lastname": "Taylor",
-      "email": "james.taylor@example.com",
-      "status": "inactive",
-      "age": 45
-    },
-    {
-      "id": 8,
-      "username": "user8",
-      "name": "Sophia",
-      "lastname": "Martinez",
-      "email": "sophia.martinez@example.com",
-      "status": "active",
-      "age": 27
-    },
-    {
-      "id": 9,
-      "username": "user9",
-      "name": "Alexander",
-      "lastname": "Hernandez",
-      "email": "alexander.hernandez@example.com",
-      "status": "active",
-      "age": 33
-    },
-    {
-      "id": 10,
-      "username": "user10",
-      "name": "Charlotte",
-      "lastname": "Garcia",
-      "email": "charlotte.garcia@example.com",
-      "status": "inactive",
-      "age": 29
-    },
-    {
-      "id": 11,
-      "username": "user11",
-      "name": "Benjamin",
-      "lastname": "Lopez",
-      "email": "benjamin.lopez@example.com",
-      "status": "active",
-      "age": 38
-    },
-    {
-      "id": 12,
-      "username": "user12",
-      "name": "Amelia",
-      "lastname": "Perez",
-      "email": "amelia.perez@example.com",
-      "status": "inactive",
-      "age": 42
-    },
-    {
-      "id": 13,
-      "username": "user13",
-      "name": "Ethan",
-      "lastname": "Williams",
-      "email": "ethan.williams@example.com",
-      "status": "active",
-      "age": 31
-    },
-    {
-      "id": 14,
-      "username": "user14",
-      "name": "Mia",
-      "lastname": "Rodriguez",
-      "email": "mia.rodriguez@example.com",
-      "status": "active",
-      "age": 26
-    },
-    {
-      "id": 15,
-      "username": "user15",
-      "name": "Daniel",
-      "lastname": "Hernandez",
-      "email": "daniel.hernandez@example.com",
-      "status": "inactive",
-      "age": 36
-    },
-    {
-      "id": 16,
-      "username": "user16",
-      "name": "Harper",
-      "lastname": "Lopez",
-      "email": "harper.lopez@example.com",
-      "status": "active",
-      "age": 34
-    },
-    {
-      "id": 17,
-      "username": "user17",
-      "name": "Aiden",
-      "lastname": "Gonzalez",
-      "email": "aiden.gonzalez@example.com",
-      "status": "active",
-      "age": 39
-    },
-    {
-      "id": 18,
-      "username": "user18",
-      "name": "Evelyn",
-      "lastname": "Torres",
-      "email": "evelyn.torres@example.com",
-      "status": "inactive",
-      "age": 43
-    },
-    {
-      "id": 19,
-      "username": "user19",
-      "name": "Liam",
-      "lastname": "Flores",
-      "email": "liam.flores@example.com",
-      "status": "active",
-      "age": 37
-    },
-    {
-      "id": 20,
-      "username": "user20",
-      "name": "Avery",
-      "lastname": "Rivera",
-      "email": "avery.rivera@example.com",
-      "status": "active",
-      "age": 41
-    },
-    {
-      "id": 21,
-      "username": "user21",
-      "name": "Aria",
-      "lastname": "Cook",
-      "email": "aria.cook@example.com",
-      "status": "inactive",
-      "age": 28
-    },
-    {
-      "id": 22,
-      "username": "user22",
-      "name": "Jackson",
-      "lastname": "Long",
-      "email": "jackson.long@example.com",
-      "status": "active",
-      "age": 30
-    },
-    {
-      "id": 23,
-      "username": "user23",
-      "name": "Scarlett",
-      "lastname": "Cooper",
-      "email": "scarlett.cooper@example.com",
-      "status": "active",
-      "age": 35
-    },
-    {
-      "id": 24,
-      "username": "user24",
-      "name": "Logan",
-      "lastname": "Lee",
-      "email": "logan.lee@example.com",
-      "status": "inactive",
-      "age": 32
-    },
-    {
-      "id": 25,
-      "username": "user25",
-      "name": "Layla",
-      "lastname": "Gomez",
-      "email": "layla.gomez@example.com",
-      "status": "active",
-      "age": 29
-    },
-    {
       "id": 26,
       "username": "user26",
       "name": "Lucas",
@@ -235,31 +10,13 @@
       "age": 33
     },
     {
-      "id": 27,
-      "username": "user27",
-      "name": "Chloe",
-      "lastname": "Mitchell",
-      "email": "chloe.mitchell@example.com",
-      "status": "inactive",
-      "age": 36
-    },
-    {
       "id": 28,
       "username": "user28",
       "name": "Mateo",
       "lastname": "Young",
       "email": "mateo.young@example.com",
-      "status": "active",
+      "status": "inactive",
       "age": 31
-    },
-    {
-      "id": 29,
-      "username": "user29",
-      "name": "Zoe",
-      "lastname": "Adams",
-      "email": "zoe.adams@example.com",
-      "status": "active",
-      "age": 34
     },
     {
       "id": 30,
@@ -343,15 +100,6 @@
       "age": 32
     },
     {
-      "id": 39,
-      "username": "user39",
-      "name": "Mason",
-      "lastname": "Howard",
-      "email": "mason.howard@example.com",
-      "status": "inactive",
-      "age": 34
-    },
-    {
       "id": 40,
       "username": "user40",
       "name": "Penelope",
@@ -359,60 +107,6 @@
       "email": "penelope.coleman@example.com",
       "status": "active",
       "age": 28
-    },
-    {
-      "id": 41,
-      "username": "user41",
-      "name": "Elijah",
-      "lastname": "Cox",
-      "email": "elijah.cox@example.com",
-      "status": "active",
-      "age": 31
-    },
-    {
-      "id": 42,
-      "username": "user42",
-      "name": "Abigail",
-      "lastname": "Richardson",
-      "email": "abigail.richardson@example.com",
-      "status": "inactive",
-      "age": 29
-    },
-    {
-      "id": 43,
-      "username": "user43",
-      "name": "Luke",
-      "lastname": "Kelly",
-      "email": "luke.kelly@example.com",
-      "status": "active",
-      "age": 33
-    },
-    {
-      "id": 44,
-      "username": "user44",
-      "name": "Hazel",
-      "lastname": "Edwards",
-      "email": "hazel.edwards@example.com",
-      "status": "active",
-      "age": 30
-    },
-    {
-      "id": 45,
-      "username": "user45",
-      "name": "Connor",
-      "lastname": "Bailey",
-      "email": "connor.bailey@example.com",
-      "status": "inactive",
-      "age": 35
-    },
-    {
-      "id": 46,
-      "username": "user46",
-      "name": "Lillian",
-      "lastname": "Rivera",
-      "email": "lillian.rivera@example.com",
-      "status": "active",
-      "age": 32
     },
     {
       "id": 47,
@@ -424,40 +118,103 @@
       "age": 29
     },
     {
-      "id": 48,
-      "username": "user48",
-      "name": "Leah",
-      "lastname": "Hill",
-      "email": "leah.hill@example.com",
+      "id": "fcc240c9-6508-4fe2-abf4-bba0c3835c1a",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
       "status": "inactive",
-      "age": 31
+      "age": "22"
     },
     {
-      "id": 49,
-      "username": "user49",
-      "name": "Nathan",
-      "lastname": "Gray",
-      "email": "nathan.gray@example.com",
+      "id": "11a8b874-bca8-47b8-8d58-e7be9bf94cc6",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
       "status": "active",
-      "age": 30
+      "age": "22"
     },
     {
-      "id": 50,
-      "username": "user50",
-      "name": "Grace",
-      "lastname": "Allen",
-      "email": "grace.allen@example.com",
+      "id": "093774ae-3115-4086-9a93-63a51d02bc5d",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
       "status": "active",
-      "age": 32
+      "age": "22"
     },
     {
-      "id": "f8489553-2361-492c-be60-4f3cc07085b2",
-      "username": "limonnnnnn",
-      "name": "limoncito",
-      "lastname": "likito",
-      "email": "li@gmail.com",
+      "id": "9c1e667b-c4c0-40a5-b91b-0b9f1ea9a74e",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
       "status": "active",
-      "age": "44"
+      "age": "22"
+    },
+    {
+      "id": "f647a164-e644-4716-982a-bdc96ffe09a2",
+      "username": "rut",
+      "name": "ruth",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "inactive",
+      "age": "42"
+    },
+    {
+      "id": "6b419e8d-9b1c-4d87-9e66-f60d59796e4a",
+      "username": "rut",
+      "name": "ruth",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "active",
+      "age": "42"
+    },
+    {
+      "id": "8eda0b29-b22d-48b1-9b74-7013e86ee2c6",
+      "username": "rut",
+      "name": "ruth",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "inactive",
+      "age": "42"
+    },
+    {
+      "id": "3cfab27c-e68c-4f97-b04e-b172a2ea335b",
+      "username": "rut",
+      "name": "ruth",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "inactive",
+      "age": "42"
+    },
+    {
+      "id": "284cf0e1-e78f-47c1-bacc-624e119b0e41",
+      "username": "rut",
+      "name": "ruth",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "active",
+      "age": "42"
+    },
+    {
+      "id": "64bb76bd-06b0-4d57-b44e-29ca37a2a838",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
+      "status": "active",
+      "age": "22"
+    },
+    {
+      "id": "f3857b97-69ba-42bf-8b22-b5b03dd6987a",
+      "username": "pepe",
+      "name": "robert",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
+      "status": "active",
+      "age": "22"
     }
   ]
 }

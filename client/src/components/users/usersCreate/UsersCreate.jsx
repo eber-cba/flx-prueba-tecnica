@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { createUser, editUser } from "../../../redux/users";
 import { v4 as uuidv4 } from "uuid";
 import { useInput } from "../../../hook/useInput";
-import { Input, Select, Button } from "antd";
+import { Input, Select, Button, Spin, message } from "antd";
 import "./style.css";
 
 const { Option } = Select;
@@ -13,6 +13,7 @@ export default function CreateUserForm({ initialValues, onCancel }) {
   const isEditing = !!initialValues && !!initialValues.id;
 
   const [editedUser, setEditedUser] = useState(initialValues || {});
+  const [loading, setLoading] = useState(false); // State for loading spin
 
   const inputClass = "form-input";
 
@@ -35,8 +36,10 @@ export default function CreateUserForm({ initialValues, onCancel }) {
     }
   }, [initialValues]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show spin
+
     const userData = {
       id: isEditing ? initialValues.id : uuidv4(),
       username: username.value,
@@ -47,12 +50,18 @@ export default function CreateUserForm({ initialValues, onCancel }) {
       age: age.value,
     };
 
+    // Simulate async operation (replace with actual API call)
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     if (isEditing) {
       dispatch(editUser(userData));
+      message.success("Usuario editado correctamente");
     } else {
       dispatch(createUser(userData));
+      message.success("Usuario agregado correctamente");
     }
 
+    setLoading(false); // Hide spin
     onCancel();
   };
 
@@ -139,6 +148,8 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           htmlType='submit'
           size='middle'
           className='form-button'
+          disabled={loading} // Disable button while loading
+          icon={loading ? <Spin /> : null} // Show spin icon if loading
         >
           {isEditing ? "Editar usuario" : "Agregar usuario"}
         </Button>
