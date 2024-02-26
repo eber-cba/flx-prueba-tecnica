@@ -1,28 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createUser, editUser } from "../../../redux/users"; // Importa las acciones de crear y editar usuario desde el archivo de acciones correspondiente en Redux
-import { v4 as uuidv4 } from "uuid"; // Importa la función uuidv4 para generar IDs únicos
-import { useInput } from "../../../hook/useInput"; // Importa el hook useInput, probablemente personalizado
-import { Input, Select, Button, Spin, message } from "antd"; // Importa componentes de Ant Design
+import React, { useState } from "react"; // Importa React y useState desde React
+import { useDispatch } from "react-redux"; // Importa useDispatch desde react-redux
+import { createUser, editUser } from "../../../redux/users"; // Importa las acciones createUser y editUser desde el archivo users en la carpeta redux
+import { v4 as uuidv4 } from "uuid"; // Importa la función v4 de la librería uuid como uuidv4
+import { useInput } from "../../../hook/useInput"; // Importa la función useInput desde el archivo useInput en la carpeta hook
+import { Input, Select, Button, Spin, message } from "antd"; // Importa componentes específicos desde la librería antd
 import {
   ExclamationCircleOutlined,
   CheckCircleOutlined,
-} from "@ant-design/icons"; // Importa iconos de Ant Design
+} from "@ant-design/icons"; // Importa iconos específicos desde la librería de iconos de Ant Design
 
-import "./style.css"; // Importa estilos locales
+import "./style.css"; // Importa estilos CSS desde un archivo local
 
-const { Option } = Select; // Define la constante Option para usarla con Select
+const { Option } = Select; // Extrae el componente Option de Select
 
 export default function CreateUserForm({ initialValues, onCancel }) {
-  const dispatch = useDispatch(); // Obtiene la función de despacho de acciones de Redux
-  const isEditing = !!initialValues && !!initialValues.id; // Determina si el formulario está en modo de edición
+  // Define el componente CreateUserForm
+  const dispatch = useDispatch(); // Inicializa dispatch con la función useDispatch de react-redux
+  const isEditing = !!initialValues && !!initialValues.id; // Determina si initialValues existe y tiene un id
 
-  const [loading, setLoading] = useState(false); // Estado para controlar el estado de carga del formulario
-  const [formSubmitted, setFormSubmitted] = useState(false); // Estado para rastrear si el formulario se ha enviado
+  const [loading, setLoading] = useState(false); // Inicializa loading y setLoading con useState, loading se inicializa en false
+  const [formSubmitted, setFormSubmitted] = useState(false); // Inicializa formSubmitted y setFormSubmitted con useState, formSubmitted se inicializa en false
 
-  const inputClass = "form-input"; // Clase CSS para los campos de entrada del formulario
+  const inputClass = "form-input"; // Define la clase CSS inputClass como "form-input"
 
-  // Define los campos del formulario y sus estados usando el hook useInput
+  // Define varios estados locales con la función useInput y utiliza los valores iniciales proporcionados o cadenas vacías si no se proporcionan
   const username = useInput(initialValues?.username || "");
   const name = useInput(initialValues?.name || "");
   const lastname = useInput(initialValues?.lastname || "");
@@ -30,19 +31,20 @@ export default function CreateUserForm({ initialValues, onCancel }) {
   const [status, setStatus] = useState(initialValues?.status || undefined);
   const age = useInput(initialValues?.age || "");
 
-  // Expresiones regulares para validar los campos del formulario
+  // Define expresiones regulares para validar la entrada del usuario en los campos de formulario
   const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
   const nameRegex = /^[a-zA-Z\s]{1,30}$/;
   const lastnameRegex = /^[a-zA-Z\s]{1,30}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Función para manejar el envío del formulario
+  // Define la función handleSubmit para manejar el envío del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita el comportamiento de envío predeterminado del formulario
-    setLoading(true); // Establece el estado de carga en verdadero
-    setFormSubmitted(true); // Marca el formulario como enviado
+    e.preventDefault(); // Evita que el formulario se envíe automáticamente
 
-    // Valida todos los campos del formulario
+    setLoading(true); // Establece loading en true para mostrar un indicador de carga
+    setFormSubmitted(true); // Establece formSubmitted en true para indicar que el formulario ha sido enviado
+
+    // Objeto que almacena la validez de cada campo del formulario
     const updatedValidity = {
       username: usernameRegex.test(username.value),
       name: nameRegex.test(name.value),
@@ -52,14 +54,14 @@ export default function CreateUserForm({ initialValues, onCancel }) {
       status: !!status,
     };
 
-    // Si algún campo no es válido, muestra un mensaje de error y detiene el envío del formulario
+    // Verifica si todos los campos tienen valores válidos
     if (!Object.values(updatedValidity).every((valid) => valid)) {
-      message.error("Por favor, complete todos los campos correctamente");
-      setLoading(false); // Establece el estado de carga en falso
-      return;
+      message.error("Por favor, complete todos los campos correctamente"); // Muestra un mensaje de error si algún campo no es válido
+      setLoading(false); // Establece loading en false para ocultar el indicador de carga
+      return; // Sale de la función handleSubmit
     }
 
-    // Construye el objeto de datos del usuario a partir de los valores del formulario
+    // Objeto que contiene los datos del usuario a enviar al servidor
     const userData = {
       id: isEditing ? initialValues.id : uuidv4(),
       username: username.value,
@@ -70,22 +72,23 @@ export default function CreateUserForm({ initialValues, onCancel }) {
       age: age.value,
     };
 
-    // Simula una espera de 2 segundos antes de realizar la acción correspondiente (crear o editar usuario)
+    // Simula un tiempo de espera de 2 segundos antes de enviar los datos al servidor
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Realiza la acción correspondiente (crear o editar usuario) según el modo de edición
+    // Envia los datos del usuario al servidor dependiendo de si se está editando o creando un nuevo usuario
     if (isEditing) {
-      dispatch(editUser(userData)); // Despacha la acción para editar usuario
+      dispatch(editUser(userData)); // Envia los datos editados del usuario al servidor
       message.success("Usuario editado correctamente"); // Muestra un mensaje de éxito
     } else {
-      dispatch(createUser(userData)); // Despacha la acción para crear usuario
+      dispatch(createUser(userData)); // Crea un nuevo usuario enviando los datos al servidor
       message.success("Usuario agregado correctamente"); // Muestra un mensaje de éxito
     }
 
-    setLoading(false); // Establece el estado de carga en falso
-    onCancel(); // Llama a la función onCancel para cerrar el formulario
+    setLoading(false); // Establece loading en false para ocultar el indicador de carga
+    onCancel(); // Ejecuta la función onCancel para cerrar el formulario o realizar otra acción deseada
   };
 
+  // Retorna el formulario con los campos de entrada y botones
   return (
     <form onSubmit={handleSubmit} className='create-user-form'>
       <div className='form-column'>
@@ -100,8 +103,8 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           onChange={username.onChange}
           placeholder='johndoe'
           className={inputClass}
-          suffix={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
+          autoFocus
+          addonAfter={
             username.value && usernameRegex.test(username.value) ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -117,14 +120,14 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           Nombre
         </label>
         <Input
+          autoFocus
           type='text'
           name='name'
           value={name.value}
           onChange={name.onChange}
           placeholder='John'
           className={inputClass}
-          suffix={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
+          addonAfter={
             name.value && nameRegex.test(name.value) ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -135,7 +138,7 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           }
         />
 
-        {/* Selector para el estado del usuario */}
+        {/* Campo de selección para el estado */}
         <label className='form-label' htmlFor='status'>
           Estado
         </label>
@@ -146,7 +149,6 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           placeholder='Seleccione un estado'
           className={inputClass}
           suffixIcon={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
             status ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -166,14 +168,14 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           Apellido
         </label>
         <Input
+          autoFocus
           type='text'
           name='lastname'
           value={lastname.value}
           onChange={lastname.onChange}
           placeholder='Doe'
           className={inputClass}
-          suffix={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
+          addonAfter={
             lastname.value && lastnameRegex.test(lastname.value) ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -189,14 +191,14 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           Email
         </label>
         <Input
+          autoFocus
           type='email'
           name='email'
           value={email.value}
           onChange={email.onChange}
           placeholder='jhondoe@domain.com'
           className={inputClass}
-          suffix={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
+          addonAfter={
             email.value && emailRegex.test(email.value) ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -212,14 +214,14 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           Edad
         </label>
         <Input
+          autoFocus
           type='number'
           name='age'
           value={age.value}
           onChange={age.onChange}
           placeholder='43'
           className={inputClass}
-          suffix={
-            // Ícono de marca de verificación si el valor del campo es válido, ícono de exclamación si no lo es
+          addonAfter={
             age.value ? (
               <CheckCircleOutlined style={{ color: "green" }} />
             ) : (
@@ -230,7 +232,7 @@ export default function CreateUserForm({ initialValues, onCancel }) {
           }
         />
 
-        {/* Botón de enviar el formulario */}
+        {/* Botón para enviar el formulario */}
         <Button
           type='primary'
           htmlType='submit'

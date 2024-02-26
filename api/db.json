@@ -6,7 +6,7 @@
       "name": "David",
       "lastname": "Parker",
       "email": "david.parker@example.com",
-      "status": "active",
+      "status": "inactive",
       "age": 27
     },
     {
@@ -164,7 +164,7 @@
     },
     {
       "id": "74e20b03-35fb-4d34-a490-dfba1ca3ed57",
-      "username": "pepe",
+      "username": "peps",
       "name": "eber",
       "lastname": "tta",
       "email": "tqsafas@gmail.com",
@@ -186,8 +186,35 @@
       "name": "fas",
       "lastname": "fsa",
       "email": "erur@gmail.com",
-      "status": "active",
+      "status": "inactive",
       "age": "42"
+    },
+    {
+      "id": "f3160c2a-856d-40a5-82cb-6e787c456bfc",
+      "username": "pepe",
+      "name": "ee",
+      "lastname": "tta",
+      "email": "estaban@gmaiil.com",
+      "status": "active",
+      "age": "3"
+    },
+    {
+      "id": "66224a39-2ab9-421d-8a6c-ebea831b6e95",
+      "username": "ebe",
+      "name": "ffsa",
+      "lastname": "ruben",
+      "email": "ebercoronel29+tutor@gmail.com",
+      "status": "inactive",
+      "age": "44"
+    },
+    {
+      "id": "a3c0e189-b0fd-4ef6-bb72-bbbfc4c6e318",
+      "username": "juaan",
+      "name": "fasa",
+      "lastname": "ggallego",
+      "email": "facu@plataforma5.la",
+      "status": "inactive",
+      "age": "42221"
     }
   ]
 }

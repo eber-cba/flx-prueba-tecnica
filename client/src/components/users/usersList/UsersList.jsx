@@ -56,7 +56,7 @@ export default function UsersList() {
         setIsDeleting(false); // Restablece el estado de eliminación
         setConfirmDeleteVisible(false); // Oculta el modal de confirmación de eliminación
         dispatch(getAllUsers()); // Obtiene todos los usuarios actualizados
-      }, 1000);
+      }, 3000);
     } catch (error) {
       setIsDeleting(false); // Restablece el estado de eliminación en caso de error
       message.error("Hubo un error al eliminar el usuario"); // Muestra un mensaje de error
