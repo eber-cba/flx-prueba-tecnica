@@ -1,100 +1,100 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Table, Modal, Input, Select, Spin, message } from "antd";
-import { getAllUsers, deleteUser } from "../../../redux/users"; // Importa las acciones necesarias desde redux
-import UserCreate from "../usersCreate/UsersCreate"; // Importa el componente para crear usuarios
-import "./style.css"; // Importa los estilos CSS
+import { getAllUsers, deleteUser } from "../../../redux/users";
+import UserCreate from "../usersCreate/UsersCreate"; // Importa el componente UserCreate para agregar/editar usuarios
+import "./style.css";
 
-const { Option } = Select; // Importa el componente Option de Ant Design
-const { Search } = Input; // Importa el componente Search de Ant Design
+const { Option } = Select;
+const { Search } = Input;
 
 export default function UsersList() {
-  const dispatch = useDispatch(); // Crea una función dispatch para despachar acciones
-  const users = useSelector((state) => state.users); // Obtiene el estado de los usuarios desde redux
+  const dispatch = useDispatch(); // Obtiene la función de despacho de Redux
+  const users = useSelector((state) => state.users); // Obtiene los usuarios del estado global
   const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
-  const [selectedUser, setSelectedUser] = useState(null); // Estado para almacenar el usuario seleccionado
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para almacenar el usuario seleccionado para editar
   const [filteredUsers, setFilteredUsers] = useState(users); // Estado para almacenar los usuarios filtrados
   const [filter, setFilter] = useState("all"); // Estado para almacenar el filtro seleccionado
   const [searchText, setSearchText] = useState(""); // Estado para almacenar el texto de búsqueda
   const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false); // Estado para controlar la visibilidad del modal de confirmación de eliminación
-  const [userToDelete, setUserToDelete] = useState(null); // Estado para almacenar el usuario que se va a eliminar
-  const [isDeleting, setIsDeleting] = useState(false); // Estado para controlar el proceso de eliminación
+  const [userToDelete, setUserToDelete] = useState(null); // Estado para almacenar el usuario que se eliminará
+  const [isDeleting, setIsDeleting] = useState(false); // Estado para controlar el estado de eliminación
 
-  // Efecto para cargar los usuarios al montar el componente
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllUsers()); // Obtiene todos los usuarios al montar el componente
   }, [dispatch]);
 
-  // Efecto para filtrar los usuarios cuando cambia el estado de usuarios, el filtro o el texto de búsqueda
   useEffect(() => {
-    filterUsers();
-  }, [users, filter, searchText]);
+    filterUsers(); // Filtra los usuarios cuando cambia la lista de usuarios, el filtro o el texto de búsqueda
+  }, [users, filter, searchText]); // Actualiza el parámetro
 
-  // Función para agregar un nuevo usuario
+  // Función para manejar la adición de un nuevo usuario
   const handleAddUser = () => {
-    setSelectedUser(null);
-    setIsModalVisible(true);
+    setSelectedUser(null); // Restablece el usuario seleccionado
+    setIsModalVisible(true); // Muestra el modal
   };
 
-  // Función para editar un usuario
+  // Función para manejar la edición de un usuario
   const handleEditUser = (user) => {
-    setSelectedUser(user);
-    setIsModalVisible(true);
+    setSelectedUser(user); // Establece el usuario seleccionado para edición
+    setIsModalVisible(true); // Muestra el modal
   };
 
-  // Función para solicitar la eliminación de un usuario
+  // Función para manejar la eliminación de un usuario
   const handleDeleteUser = (user) => {
-    setUserToDelete(user);
-    setConfirmDeleteVisible(true);
+    setUserToDelete(user); // Establece el usuario que se eliminará
+    setConfirmDeleteVisible(true); // Muestra el modal de confirmación de eliminación
   };
 
   // Función para confirmar la eliminación de un usuario
   const confirmDelete = async () => {
     try {
-      setIsDeleting(true);
-      await dispatch(deleteUser(userToDelete.id));
+      setIsDeleting(true); // Establece el estado de eliminación en verdadero
+      await dispatch(deleteUser(userToDelete.id)); // Elimina el usuario
       setTimeout(() => {
-        message.success("Usuario eliminado correctamente");
-        setIsDeleting(false);
-        setConfirmDeleteVisible(false);
-        dispatch(getAllUsers());
+        message.success("Usuario eliminado correctamente"); // Muestra un mensaje de éxito
+        setIsDeleting(false); // Restablece el estado de eliminación
+        setConfirmDeleteVisible(false); // Oculta el modal de confirmación de eliminación
+        dispatch(getAllUsers()); // Obtiene todos los usuarios actualizados
       }, 1000);
     } catch (error) {
-      setIsDeleting(false);
-      message.error("Hubo un error al eliminar el usuario");
+      setIsDeleting(false); // Restablece el estado de eliminación en caso de error
+      message.error("Hubo un error al eliminar el usuario"); // Muestra un mensaje de error
     }
   };
 
-  // Función para cancelar la operación en el modal
+  // Función para manejar el cierre del modal
   const handleModalCancel = () => {
-    setIsModalVisible(false);
-    setSelectedUser(null);
+    setIsModalVisible(false); // Oculta el modal
+    setSelectedUser(null); // Restablece el usuario seleccionado
   };
 
-  // Función para cerrar el modal después de realizar una acción
+  // Función para manejar la acción al confirmar en el modal
   const handleModalOk = () => {
-    setIsModalVisible(false);
-    setSelectedUser(null);
+    setIsModalVisible(false); // Oculta el modal
+    setSelectedUser(null); // Restablece el usuario seleccionado
   };
 
-  // Función para manejar el cambio en el filtro
+  // Función para manejar el cambio de filtro
   const handleFilterChange = (value) => {
-    setFilter(value);
+    setFilter(value); // Establece el filtro seleccionado
   };
 
-  // Función para manejar el cambio en el texto de búsqueda
+  // Función para manejar la búsqueda
   const handleSearch = (e) => {
-    setSearchText(e.target.value);
+    setSearchText(e.target.value); // Establece el texto de búsqueda
   };
 
-  // Función para filtrar los usuarios
+  // Función para filtrar los usuarios según el filtro y el texto de búsqueda
   const filterUsers = () => {
-    let filteredData = users;
+    let filteredData = users; // Inicialmente, muestra todos los usuarios
 
+    // Filtra por estado si se selecciona un estado específico
     if (filter !== "all") {
       filteredData = filteredData.filter((user) => user.status === filter);
     }
 
+    // Filtra por texto de búsqueda en nombre o apellido
     if (searchText !== "") {
       filteredData = filteredData.filter(
         (user) =>
@@ -103,26 +103,24 @@ export default function UsersList() {
       );
     }
 
-    setFilteredUsers(filteredData);
+    setFilteredUsers(filteredData); // Actualiza la lista de usuarios filtrados
   };
 
   return (
     <div>
-      {/* Contenedor de la tabla */}
       <div className='table-container'>
         <p>
           Usuarios / <b>Lista de usuarios</b>
         </p>
-        {/* Contenedor de filtros */}
         <div className='container-filtros' style={{ marginBottom: 16 }}>
           <div>
-            {/* Campo de búsqueda */}
+            {/* Entrada de búsqueda */}
             <Search
               placeholder='Búsqueda por nombre o apellido'
               style={{ width: 270, marginRight: 16 }}
               onChange={handleSearch}
             />
-            {/* Selector de filtro por estado */}
+            {/* Selector de filtro */}
             <Select
               style={{ width: 170, marginRight: 16 }}
               onChange={handleFilterChange}
@@ -133,8 +131,8 @@ export default function UsersList() {
               <Option value='inactive'>Inactivos</Option>
             </Select>
           </div>
-          {/* Botón para agregar usuario */}
           <div>
+            {/* Botón para agregar usuario */}
             <Button type='primary' onClick={handleAddUser}>
               Agregar Usuario
             </Button>
@@ -147,6 +145,7 @@ export default function UsersList() {
           rowKey='id'
           align='right'
           columns={[
+            // Columnas de la tabla
             {
               title: <div className='custom-column-username'>Usuario</div>,
               dataIndex: "username",
@@ -174,6 +173,7 @@ export default function UsersList() {
               key: "status",
               className: "custom-column-data column-status",
               render: (status) => (
+                // Botón con el estado del usuario
                 <Button
                   type='outline'
                   style={{
@@ -198,8 +198,8 @@ export default function UsersList() {
               key: "action",
               className: "custom-column-data column-action",
               render: (text, record) => (
+                // Botones de acción para editar y eliminar usuarios
                 <span className='action-buttons'>
-                  {/* Botones para editar y eliminar usuarios */}
                   <Button type='link' onClick={() => handleEditUser(record)}>
                     Editar
                   </Button>{" "}
@@ -210,7 +210,6 @@ export default function UsersList() {
                   >
                     Eliminar
                   </Button>
-                  {/* Indicador de carga al eliminar un usuario */}
                   {isDeleting &&
                     userToDelete &&
                     userToDelete.id === record.id && (
@@ -224,9 +223,10 @@ export default function UsersList() {
         />
       </div>
 
-      {/* Modal para editar/crear usuario */}
+      {/* Modal para agregar/editar usuarios */}
       <Modal
-        title={selectedUser ? "Editar Usuario" : "Agregar Usuario"}
+        className='modal-users'
+        title={selectedUser ? "Editar Usuario" : "Agregar usuario"}
         open={isModalVisible}
         onCancel={handleModalCancel}
         onOk={handleModalOk}
@@ -236,7 +236,7 @@ export default function UsersList() {
         <UserCreate initialValues={selectedUser} onCancel={handleModalCancel} />
       </Modal>
 
-      {/* Modal para confirmar eliminación de usuario */}
+      {/* Modal de confirmación de eliminación */}
       {confirmDeleteVisible && (
         <Modal
           style={{ width: "200px" }}

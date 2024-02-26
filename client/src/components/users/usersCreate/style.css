@@ -1,30 +1,42 @@
 .create-user-form {
   display: flex;
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan en filas adicionales */
+  width: 100%;
   justify-content: space-between;
 }
 
 .form-column {
-  width: 45%; /* Ancho de cada columna */
+  width: 50%; /* Ancho de cada columna */
   margin-top: 30px;
+  display: flex; /* Make the form columns into flex containers */
+  flex-direction: column; /* Stack labels and inputs vertically */
 }
 
 .form-input {
-  width: 100%;
+  width: 90%;
   margin-bottom: 40px; /* Espaciado inferior entre elementos */
 }
 
 .form-button {
-  align-self: end;
-  width: 60%;
-  margin-top: 10px; /* Espaciado superior para el botón */
-}
-.form-column {
-  display: flex; /* Make the form columns into flex containers */
-  flex-direction: column; /* Stack labels and inputs vertically */
-  margin-bottom: 1rem; /* Add some space between form columns */
+  align-self: flex-end;
+  margin-right: 8% !important;
 }
 
 .form-label {
   margin-bottom: 0.7rem; /* Add space between label and input */
   font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+  .form-button {
+    width: 70% !important; /* Ancho del botón en dispositivos medianos y grandes */
+  }
+}
+.invalid {
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 768px) {
+  .form-button {
+    width: 70% !important; /* Ancho del botón en dispositivos medianos y grandes */
+  }
 }

@@ -1,42 +1,6 @@
 {
   "users": [
     {
-      "id": 30,
-      "username": "user30",
-      "name": "Madison",
-      "lastname": "Baker",
-      "email": "madison.baker@example.com",
-      "status": "inactive",
-      "age": 30
-    },
-    {
-      "id": 32,
-      "username": "user32",
-      "name": "Riley",
-      "lastname": "Nelson",
-      "email": "riley.nelson@example.com",
-      "status": "active",
-      "age": 29
-    },
-    {
-      "id": 33,
-      "username": "user33",
-      "name": "Grayson",
-      "lastname": "Evans",
-      "email": "grayson.evans@example.com",
-      "status": "inactive",
-      "age": 31
-    },
-    {
-      "id": 34,
-      "username": "user34",
-      "name": "Ella",
-      "lastname": "Carter",
-      "email": "ella.carter@example.com",
-      "status": "active",
-      "age": 33
-    },
-    {
       "id": 35,
       "username": "user35",
       "name": "David",
@@ -179,6 +143,51 @@
       "email": "tqsafas@gmail.com",
       "status": "active",
       "age": "22"
+    },
+    {
+      "id": "b9bb08f3-1631-4b7b-bd3a-5fb07b25e324",
+      "username": "gabi02",
+      "name": "gabi",
+      "lastname": "sulca",
+      "email": "gabimachineingenierimaster@mcai.com",
+      "status": "inactive",
+      "age": "25"
+    },
+    {
+      "id": "c0023e74-be15-4df2-9267-11d6c0bf7186",
+      "username": "rut",
+      "name": "macri macri",
+      "lastname": "tta",
+      "email": "mac@gmail.com",
+      "status": "active",
+      "age": "445"
+    },
+    {
+      "id": "74e20b03-35fb-4d34-a490-dfba1ca3ed57",
+      "username": "pepe",
+      "name": "eber",
+      "lastname": "tta",
+      "email": "tqsafas@gmail.com",
+      "status": "active",
+      "age": "55"
+    },
+    {
+      "id": "a0b65490-f8b6-4a9d-be4a-bec72968ed07",
+      "username": "pepe",
+      "name": "limoncito likito",
+      "lastname": "aaa",
+      "email": "li@gmail.com",
+      "status": "inactive",
+      "age": "321"
+    },
+    {
+      "id": "a2531f34-01b3-48cd-9641-45dc3f580fc8",
+      "username": "pepe",
+      "name": "fas",
+      "lastname": "fsa",
+      "email": "erur@gmail.com",
+      "status": "active",
+      "age": "42"
     }
   ]
 }

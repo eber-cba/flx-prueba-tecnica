@@ -56,11 +56,10 @@
 }
 /* Modal */
 /* Agrega estas reglas CSS en tu archivo de estilos style.css */
-.ant-modal {
-  max-width: 1000px !important; /* Establece el ancho máximo del modal */
-  width: 43% !important; /* Ajusta el ancho del modal según tus necesidades */
-}
 
+.modal-users {
+  width: 60% !important;
+}
 @media screen and (max-width: 768px) {
   .ant-modal {
     width: 95%; /* Ajusta el ancho del modal para pantallas más pequeñas */
